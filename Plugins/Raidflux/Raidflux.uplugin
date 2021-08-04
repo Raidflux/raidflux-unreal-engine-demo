@@ -1,0 +1,24 @@
+{
+	"FileVersion": 3,
+	"Version": 1,
+	"VersionName": "1.0",
+	"FriendlyName": "Raidflux",
+	"Description": "Raidflux plugin for UE",
+	"Category": "Other",
+	"CreatedBy": "Raidflux",
+	"CreatedByURL": "https://raidflux.com",
+	"DocsURL": "https://raidflux.com",
+	"MarketplaceURL": "",
+	"SupportURL": "https://raidflux.com/contact",
+	"CanContainContent": true,
+	"IsBetaVersion": false,
+	"IsExperimentalVersion": false,
+	"Installed": false,
+	"Modules": [
+		{
+			"Name": "Raidflux",
+			"Type": "Runtime",
+			"LoadingPhase": "Default"
+		}
+	]
+}

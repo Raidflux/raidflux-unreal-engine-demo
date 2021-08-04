@@ -1,0 +1,13 @@
+{
+	"FileVersion": 3,
+	"EngineAssociation": "{24FAA4CC-48B8-F991-CCB5-E0B3D5792F51}",
+	"Category": "",
+	"Description": "",
+	"Modules": [
+		{
+			"Name": "RaidfluxDemo",
+			"Type": "Runtime",
+			"LoadingPhase": "Default"
+		}
+	]
+}
