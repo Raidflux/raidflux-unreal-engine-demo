@@ -2,9 +2,6 @@
 
 #include "Raidflux.h"
 #include "Runtime/Online/HTTP/Public/Http.h"
-#include "Mothership.h"
-#include "Gameserver.h"
-#include "GameserverPort.h"
 
 DEFINE_LOG_CATEGORY(LogRaidflux);
 
@@ -24,7 +21,7 @@ void URaidflux::Deinitialize()
 	Super::Deinitialize();
 }
 
-void URaidflux::Init(int maxPlayers, FOnCompleted onCompletedCallback)
+void URaidflux::Init(int maxPlayers, const FRaidfluxOnCompleted& onCompletedCallback)
 {
 	if(this->initialized) {
 		onCompletedCallback.ExecuteIfBound();
@@ -64,7 +61,7 @@ void URaidflux::Init(int maxPlayers, FOnCompleted onCompletedCallback)
 	this->initialized = true;
 }
 
-void URaidflux::ReportPlayerCount(int currentPlayers, int maxPlayers, FOnCompleted onCompletedCallback)
+void URaidflux::ReportPlayerCount(int currentPlayers, int maxPlayers, const FRaidfluxOnCompleted& onCompletedCallback)
 {
 	if (!this->initialized || (this->lastCurrentPlayers == currentPlayers && this->lastMaxPlayers == maxPlayers) || this->GetSeatID().Equals(TEXT("null"))) {
 		onCompletedCallback.ExecuteIfBound();
@@ -98,7 +95,7 @@ void URaidflux::ReportPlayerCount(int currentPlayers, int maxPlayers, FOnComplet
 	request->ProcessRequest();
 }
 
-void URaidflux::FetchMotherships(const FString& deploymentID, FOnMothershipsFetched onCompletedCallback) {
+void URaidflux::FetchMotherships(const FString& deploymentID, const FRaidfluxOnMothershipsFetched& onCompletedCallback) {
 	FString registerUrl = URaidflux::MakeMatchmakerUrl(URaidflux::MATCHMAKER_MOTHERSHIPS, deploymentID);
 	auto request = this->MakeRequest(registerUrl, TEXT("GET"));
 	request->OnProcessRequestComplete().BindLambda([onCompletedCallback](FHttpRequestPtr request, FHttpResponsePtr response, bool bWasSuccessful) {
@@ -133,7 +130,7 @@ void URaidflux::FetchMotherships(const FString& deploymentID, FOnMothershipsFetc
 	request->ProcessRequest();
 }
 
-void URaidflux::FetchGameservers(const FString& mothershipID, FOnGameserversFetched onCompletedCallback) {
+void URaidflux::FetchGameservers(const FString& mothershipID, const FRaidfluxOnGameserversFetched& onCompletedCallback) {
 	FString registerUrl = URaidflux::MakeMatchmakerUrl(URaidflux::MATCHMAKER_GAMESERVERS, mothershipID);
 	auto request = this->MakeRequest(registerUrl, TEXT("GET"));
 	request->OnProcessRequestComplete().BindLambda([onCompletedCallback](FHttpRequestPtr request, FHttpResponsePtr response, bool bWasSuccessful) {
