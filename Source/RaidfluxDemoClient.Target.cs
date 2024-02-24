@@ -3,11 +3,11 @@
 using UnrealBuildTool;
 using System.Collections.Generic;
 
-public class RaidfluxDemoTarget : TargetRules
+public class RaidfluxDemoClientTarget : TargetRules
 {
-	public RaidfluxDemoTarget(TargetInfo Target) : base(Target)
+	public RaidfluxDemoClientTarget(TargetInfo Target) : base(Target)
 	{
-		Type = TargetType.Game;
+		Type = TargetType.Client;
 		DefaultBuildSettings = BuildSettingsVersion.V2;
 		ExtraModuleNames.Add("RaidfluxDemo");
 		bUseLoggingInShipping = true;
